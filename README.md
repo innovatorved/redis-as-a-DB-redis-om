@@ -1,34 +1,125 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# redis-om ( redis object mapping ) 
 
-First, run the development server:
+Basic of CRUD operation in redis database.
+Use redis as primary database using redis-om
 
-```bash
-npm run dev
-# or
-yarn dev
+
+
+
+## Schema Design
+
+```js
+    import {Schema , Entity} from "redis-om";
+
+    // define class inherite Entity
+    class Note extends Entity {};
+
+    // define schema for Note
+    const noteSchema = new Schema(
+        Note, {
+            title : {type : "string" , textSearch: true},
+            description : {type : "string" , textSearch: true},
+            tags : {type : "string"}
+        },
+        {
+            dataStructure : 'JSON'
+        }
+    );
+
+    export default noteSchema;
+    export {
+        noteSchema,
+        Note
+    };
+```
+## API Reference
+
+#### Create Operation
+
+```
+  POST /api/createnote
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Parameter | Type     |
+| :-------- | :--------|
+|   `body`  | `json`   |
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+##### request body
+```json
+{
+    "title" : "title",
+    "description" : "Description",
+    "tags" : "General"
+}
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+#### Read operation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+    GET /api/fetch/{id}      # fetch specific note
+    GET /api/fetch/          # fetch all notes
+```
 
-## Learn More
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `  id   ` | `string` | **Not Required**.          |
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Update operation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+    PUT /api/update/{id}
+```
+| Parameter | Type     |
+| :-------- | :--------|
+|   `body`  | `json`   |
 
-## Deploy on Vercel
+##### request body
+```json
+{
+    "title" : "updated title",
+    "description" : "updated Description",
+    "tags" : "General"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Delete Operation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+    GET /api/delete/  
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `  id   ` | `string` |        **Required**.       |
+
+
+#### Search inside the note
+
+```
+  GET /api/search?q=__string__
+ ```
+
+|   Query   | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `   q   ` | `string` |        **Required**.       |
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+  
+## Authors
+
+- [Ved Gupta](https://www.github.com/innovatorved)
+
+  
+## 🚀 About Me
+I'm a Developer i will feel the code then write .
+
+  
+## Support
+
+For support, email vedgupta@protonmail.com
