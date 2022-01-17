@@ -23,7 +23,8 @@ export default function Addnote() {
     }
     return (
         <form className='container mt-5' onSubmit={execute}>
-            <div className="mb-3">
+            <h2>Create Note</h2>
+            <div className="mb-3 my-3">
                 <label htmlFor="exampleFormControlInput1" className="form-label">Title</label>
                 <input type="text" name="title" className="form-control" id="exampleFormControlInput1" min={4} placeholder="Title" required={true} />
             </div>
