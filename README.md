@@ -5,6 +5,8 @@ Basic of CRUD operation in redis database.
 Use redis as primary database using redis-om
 
 ## Environment Variable
+
+Set your Redis Database
 ```env
     REDIS_URL=___you-redis-cloud-url__
 ```
