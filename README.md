@@ -4,7 +4,10 @@
 Basic of CRUD operation in redis database.
 Use redis as primary database using redis-om
 
-
+## Environment Variable
+```env
+    REDIS_URL=___you-redis-cloud-url__
+```
 
 
 ## Schema Design
